@@ -40,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
     private static final String AMERICAN = "American Express";
 
     String flag = null;
+    String error=null;
+
     private AppDatabase myDB;
     List<CreditCardEntry> myccdata = new ArrayList<CreditCardEntry>();
 
@@ -87,6 +89,8 @@ public class MainActivity extends AppCompatActivity {
 
         boolean result = false;
         EditText ccnumber = (EditText) findViewById(R.id.cc_number);
+
+
         ccnumberbuilder = new StringBuilder(ccnumber.getText().toString());
         StringBuilder aux_ccnumber = ccnumberbuilder;
 
@@ -94,11 +98,12 @@ public class MainActivity extends AppCompatActivity {
         int size = ccnumberbuilder.length();
         Log.d(LOG_TAG, "Length " + String.valueOf(ccnumberbuilder.length()));
 
-        char[] check = new char[1];
-        check[0] = aux_ccnumber.charAt(0);
-        int head = Integer.parseInt(String.valueOf(check[0]));
 
         if (size > 14 && size < 29) {
+
+            char[] check = new char[1];
+            check[0] = aux_ccnumber.charAt(0);
+            int head = Integer.parseInt(String.valueOf(check[0]));
 
             switch (head) {
                 case 3:
@@ -118,6 +123,12 @@ public class MainActivity extends AppCompatActivity {
 
             }
         }
+
+       if(size == 0)
+       {
+           Toast.makeText(this.getBaseContext(), "Fields are missing", Toast.LENGTH_SHORT).show();
+
+       }
 
         return result;
 
@@ -279,8 +290,11 @@ public class MainActivity extends AppCompatActivity {
         int itemThatWasClickedId = item.getItemId();
         if (itemThatWasClickedId == R.id.action_search) {
             Context context = MainActivity.this;
+
             String textToShow = "Add clicked";
             Toast.makeText(context, textToShow, Toast.LENGTH_SHORT).show();
+
+            SaveDate();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -309,21 +323,48 @@ public class MainActivity extends AppCompatActivity {
 
     public CreditCard popCrediCardData(){
 
+        String firstname=null;
+        String lasttname=null;
+        String cvv=null;
+        CreditCard cc=null;
 
         EditText efirstname = (EditText) findViewById(R.id.cc_name);
-        String firstname = efirstname.getText().toString();
+            if(!efirstname.getText().toString().isEmpty()){
+                firstname = efirstname.getText().toString();
+            }
+            else{
+                error = "First Name can not be empty";
+            }
+
 
         EditText elastname = (EditText) findViewById(R.id.cc_lastname);
-        String lasttname = elastname.getText().toString();
+        if(!elastname.getText().toString().isEmpty()){
+            lasttname = efirstname.getText().toString();
+        }
+        else{
+            error = "Last Name can not be empty";
+        }
+
 
         EditText ecvv = (EditText) findViewById(R.id.cc_cvv);
-        String cvv = elastname.getText().toString();
+        if(!ecvv.getText().toString().isEmpty()){
+            cvv = elastname.getText().toString();
+        }
+        else{
+            error = "CVV can not be empty";
+        }
 
-        CreditCard cc = new CreditCard(firstname, lasttname, cvv, ccnumberbuilder.toString(),
-                tvFromDate.getText().toString(), flag);
+
+        if(error!=null){
+            Toast.makeText(this.getBaseContext(),error,
+                    Toast.LENGTH_SHORT).show();
+        }
+        else {
+            cc = new CreditCard(firstname, lasttname, cvv, ccnumberbuilder.toString(), tvFromDate.getText().toString(), flag);
+            return cc;
+        }
 
         return cc;
-
     }
 
 
@@ -374,34 +415,43 @@ public class MainActivity extends AppCompatActivity {
 
     public void AddCCNumber(View view) {
 
+         SaveDate();
+
+    }
+
+    void SaveDate(){
+
         CreditCard cc;
         if(parseCreditCardNumber()) {
             loadImage();
             cc = popCrediCardData();
-            final CreditCardEntry ccTask = new CreditCardEntry(cc.getFirstName(), cc.getLastName(),
-                    cc.getCvv(), cc.getNum_card(), cc.getExp_date(), cc.getFlag());
-
-            myccdata.add(ccTask);
-
-            AppExecutors.getInstance().diskIO().execute(new Runnable() {
-                @Override
-                public void run() {
-                    // COMPLETED (3) Move the remaining logic inside the run method
-                    myDB.taskDao().insertTask(ccTask);
-                    finish();
-                }
-            });
 
 
+            if (cc != null) {
 
+                Toast.makeText(this.getBaseContext(), "Credit Card has been added",
+                        Toast.LENGTH_SHORT).show();
 
-           // myDB.taskDao().insertTask(ccTask);
-           // finish();
+                final CreditCardEntry ccTask = new CreditCardEntry(cc.getFirstName(), cc.getLastName(),
+                        cc.getCvv(), cc.getNum_card(), cc.getExp_date(), cc.getFlag());
 
-            Intent addTaskIntent = new Intent(this, CreditCardTasks.class);
-            startActivity(addTaskIntent);
+                myccdata.add(ccTask);
+
+                AppExecutors.getInstance().diskIO().execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        myDB.taskDao().insertTask(ccTask);
+                        finish();
+                    }
+                });
+
+                Intent addTaskIntent = new Intent(this, CreditCardTasks.class);
+                startActivity(addTaskIntent);
+
+            }
 
         }
+
 
 
     }
