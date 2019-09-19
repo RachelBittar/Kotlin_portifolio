@@ -1,0 +1,11 @@
+<application>
+  <component name="GithubAccounts">
+    <account id="8f30a2ca-bcad-49c7-9719-4b0fa2ba1fb2" name="RachelBittar">
+      <server host="github.com" />
+    </account>
+  </component>
+  <component name="GithubSettings">
+    <option name="AUTH_TYPE" value="TOKEN" />
+    <option name="COPY_URL_GIST" value="true" />
+  </component>
+</application>
