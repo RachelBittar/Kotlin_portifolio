@@ -1,3 +1,1 @@
 # AndroidStudioProjects
-# AndroidStudioProjects
-# AndroidProjects
