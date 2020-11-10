@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/fragment_login"
-        android:name="bittar.rachel.theshoesstore.Login_Fragment"
+        android:name="bittar.rachel.theshoesstore.Screens.Login_Fragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -16,7 +16,16 @@
     </fragment>
     <fragment
         android:id="@+id/welcomeScreen"
-        android:name="bittar.rachel.theshoesstore.WelcomeScreen"
+        android:name="bittar.rachel.theshoesstore.Screens.WelcomeScreen"
         android:label="fragment_welcome_screen"
-        tools:layout="@layout/fragment_welcome_screen" />
+        tools:layout="@layout/fragment_welcome_screen" >
+        <action
+            android:id="@+id/action_welcomeScreen_to_instruction"
+            app:destination="@id/instruction" />
+    </fragment>
+    <fragment
+        android:id="@+id/instruction"
+        android:name="bittar.rachel.theshoesstore.Screens.Instruction"
+        android:label="fragment_instruction"
+        tools:layout="@layout/fragment_instruction" />
 </navigation>
