@@ -1,0 +1,62 @@
+<resources>
+    <string name="app_name">ShoesStores</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="username">User Name</string>
+    <string name="passoword">Password</string>
+    <string name="enter">Enter</string>
+    <string name="next">Next</string>
+    <string name="quote_format">\"%s\"</string>
+    <string name="price_format"> Ca$: %d</string>
+    <string name="details">Details</string>
+    <string name="welcome">Welcome</string>
+    <string name="instruction">instructions</string>
+    <string name="instructions">"\n\01 - Know What You Want
+   Probably the most important of all the things you can do when you shop online is to know what you want. So before you buy, take the time to explore and be sure.
+
+   \n\02 - Take a Break
+   Know exactly what you want to buy. If you can't figure out the best choice, take a break and let yourself have time to mull it over in your mind. Then you'll be more sure about what you want.
+
+   \n\03 - Know Your True Size
+   Make sure you know true your shoe size. If purchasing for children, measure their feet and shoes. See if their toes have plenty of wiggle room and the shoes are snug.
+
+   \n\04 - Read Reviews
+   Makes sure to read reviews about whether the shoes run larger or smaller than what people expected.
+
+   \n\05 - Look at Clear Detailed Pictures
+   Make sure the website has larger or zoomable pictures of all the different angles of the shoe.
+
+   \n\06 - Stick to a Budget
+   Make sure you know what you're willing to ($) pay and stick to that budget. If your budget doesn't allow you to get your shoes, take a break to reassess and make another decision.
+
+   \n\07 - Understand Return Policy
+   Make sure you can return your shoes. Make sure you understand if there is a restocking fee.
+        08 - Be Specific about Your Goals
+    Ask yourself if the shoes your thinking of getting are really accomplishing the goals that you have in mind.
+
+    \n\09 - Comfort Level
+    Ask yourself about what level of comfort your willing to accept and read reviews about others experiences.
+
+    \n\10 - Color Preferences and Needs
+    Ask yourself about what colors your willing to accept and if they fit well with the clothing you have.
+
+    \n\11 - Compare at Least Two Different Shoes
+    Be willing to compare shoes and get a better understanding of exactly what makes them similar or different. This can help you recognize things you hadn't realized before and make your decision easier.
+
+    \n\12 - Set a Time Limit
+    Decide how much time you will take to shop, so you don't feel frustrated or impulsive., but take as much time as you need to make a smart choice.
+
+    \n\13 - Ask a Friend
+    Talk to a friend if you're unsure about what you want or need.
+
+    \n\14 - Wear Often or Not
+    Decide how many days a month you'll be wearing your shoes. This can give you insight into whether comfort is a necessity or not.
+
+    \n\15 - Look Elsewhere
+    Decide if your willing to look outside of the category of shoes you were originally searching for because it may fit all of your wants and needs better.
+
+    \n\16 - Why are You Buying Them
+    Decide if your shopping online for a lift me up, a want, or to fulfill a need. Lift me ups and wants are usually short term, but shoes that fulfill your needs will give you better long-term joy."
+           </string>
+    <string name="iagree">I agree</string>
+</resources>
