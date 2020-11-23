@@ -1,6 +1,7 @@
 package bittar.rachel.shoesstores.shoes
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -36,22 +37,30 @@ class ShoesListFragment : Fragment() {
 
         binding.setLifecycleOwner(this)
 
-        viewModel.shoe.observe(viewLifecycleOwner, Observer { newshoe ->
-            binding.wordText.text = newshoe
+        viewModel.details.observe(viewLifecycleOwner, Observer { newWord ->
+            binding.textName.text = newWord
         })
 
-//        viewModel.price.observe(viewLifecycleOwner, Observer { newprice ->
-//            binding.priceText.text = newprice.toString()
+
+//        viewModel.image.observe(viewLifecycleOwner, Observer { newWord ->
+//            binding.imageView3.setImageLevel(newWord)
 //        })
+
+
+
+
 
         viewModel.eventGiveDetails.observe(viewLifecycleOwner, Observer { isDetailed ->
             if (isDetailed) {
-                var currentShoes = viewModel.shoe.value
+                var currentShoes = viewModel.details.value
                 var currentPrice = viewModel.price.value ?: 0
+                var currentImage= viewModel.image.value ?: 0
+
                 val action = ShoesListFragmentDirections.
                 actionShoesListFragmentToDetailsFragment(
                     currentShoes.toString(),
-                    currentPrice
+                    currentPrice,
+                    currentImage
                 )
 
                 findNavController(this).navigate(action)

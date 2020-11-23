@@ -7,19 +7,31 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import bittar.rachel.shoesstores.R
 
 
 class ShoesListViewModel : ViewModel() {
 
-    private val _shoe = MutableLiveData<String>()
-    val shoe: LiveData<String>
-        get() = _shoe
 
+    data class Shoes(val imageId: Int, val details: String, val price: Int)
+
+
+
+    private val _shoe = MutableLiveData<Shoes>()
+    val shoe: LiveData<Shoes>
+        get() = _shoe
 
     private val _price = MutableLiveData<Int>()
     val price: LiveData<Int>
         get() = _price
 
+    private val _image = MutableLiveData<Int>()
+    val image: LiveData<Int>
+        get() = _image
+
+    private val _details = MutableLiveData<String>()
+    val details: LiveData<String>
+        get() = _details
 
     private val _eventGiveDetails = MutableLiveData<Boolean>()
     val eventGiveDetails: LiveData<Boolean>
@@ -29,59 +41,57 @@ class ShoesListViewModel : ViewModel() {
     val eventGameFinish: LiveData<Boolean>
         get() = _eventGameFinish
 
-    private lateinit var wordList: MutableList<String>
+   // private lateinit var wordList: MutableList<String>
+
+    private lateinit var allShoes: MutableList<Shoes>
 
     init {
-        resetList()
-        nextWord()
-        _price.value = 0
-       // _eventGiveDetails.value = true
 
+        resetListShoes()
+
+        _price.value = allShoes.get(0).price
+        _details.value = allShoes.get(0).details
+        _image.value  =  allShoes.get(0).imageId
+
+        Log.i("SListViewModelo init", _image.value.toString())
     }
 
-    private fun resetList() {
-        wordList = mutableListOf(
-            "Adidas Kampung",
-            "Ballet shoe",
-            "Pointe shoe",
-            "Bast shoe",
-            "Blucher shoe",
-            "Boat shoe",
-            "Brogan (shoes)",
-            "Brogue shoe",
-            "Brothel creeper",
-            "Bucks",
-            "Cantabrian albarcas",
-            "Chelsea boot",
-            "Chopine",
-            "Chukka boot",
-            "Climbing shoe",
-            "Clog"
+
+    private fun resetListShoes() {
+
+        allShoes = mutableListOf(
+            Shoes(R.drawable.balet, "Ballet shoe", 10),
+            Shoes(R.drawable.bluesport, "Blue Sport Sneakers", 5),
+            Shoes(R.drawable.social, "Social", 20),
+            Shoes(R.drawable.scarpin, "Scarpin", 50),
         )
-        wordList.shuffle()
-    }
 
+        allShoes.shuffle()
+    }
 
     private fun nextWord() {
-        if (wordList.isEmpty()) {
-            resetList()
+        if (allShoes.isEmpty()) {
+            resetListShoes()
         }
-        _shoe.value = wordList.removeAt(0)
+
+        _shoe.value = allShoes.removeAt(0)
     }
 
     /** Methods for buttons presses **/
 
     fun onSkip() {
-      //  _price.value = (_price.value)?.minus(1)
-        _price.value = (_price.value)?.plus(1)
         nextWord()
+        _image.value = (_shoe.value)?.imageId
     }
 
     fun onDetails() {
-        _price.value = (_price.value)?.plus(1)
-
         _eventGiveDetails.value = true
-        Log.i("ShoesListViewModelooo", _eventGiveDetails.value.toString())
+        _price.value = (_shoe.value)?.price
+        _details.value =(_shoe.value)?.details
+        _image.value = (_shoe.value)?.imageId
+
+      //  _eventGiveDetails.value = true
+        Log.i("ShoesListViewModelooo", _image.value.toString())
 
     }
 

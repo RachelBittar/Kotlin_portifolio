@@ -58,6 +58,9 @@
         <argument
             android:name="prices"
             app:argType="integer" />
+        <argument
+            android:name="image"
+            app:argType="integer" />
     </fragment>
 
 </navigation>

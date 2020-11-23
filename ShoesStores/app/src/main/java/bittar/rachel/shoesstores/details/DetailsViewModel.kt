@@ -4,7 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class DetailsViewModel(finalShoes: String, finalPrice: Int) : ViewModel() {
+class DetailsViewModel(finalImage: Int, finalShoes: String, finalPrice: Int) : ViewModel() {
+
+
+    private val _finalImage = MutableLiveData<Int>()
+    val finalImage: LiveData<Int>
+        get() = _finalImage
 
     private val _finalShoes = MutableLiveData<String>()
     val fshoes: LiveData<String>
@@ -22,6 +27,9 @@ class DetailsViewModel(finalShoes: String, finalPrice: Int) : ViewModel() {
     init {
         _finalShoes.value = finalShoes
         _finalprice.value = finalPrice
+        _finalImage.value = finalImage
+
+
     }
     fun onPlayAgain() {
         _eventPlayAgain.value = true

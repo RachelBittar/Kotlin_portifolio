@@ -2,14 +2,12 @@ package bittar.rachel.shoesstores.details
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import bittar.rachel.shoesstores.R
@@ -36,8 +34,14 @@ class DetailsFragment : Fragment() {
 
         val detailsFragmentArgs by navArgs<DetailsFragmentArgs>()
 
-        viewModelFactory = DetailsViewModelFactory(detailsFragmentArgs.shoes, detailsFragmentArgs.prices)
+        viewModelFactory = DetailsViewModelFactory(detailsFragmentArgs.image,detailsFragmentArgs.shoes, detailsFragmentArgs.prices)
         viewModel = ViewModelProvider(this,viewModelFactory).get(DetailsViewModel::class.java)
+
+
+        viewModel.finalImage.observe(viewLifecycleOwner, Observer { newfinalImage ->
+                binding.imageView2.setImageResource(newfinalImage)
+
+        })
 
 
         binding.detailsViewModel = viewModel
